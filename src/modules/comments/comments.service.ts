@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Comment } from './comments.entity';
+import { Comment } from '../../entities/Comment.entity';
+import { CreateCommentDto } from './dto/create-comments.dto';
 
 @Injectable()
 export class CommentsService {
@@ -37,9 +38,9 @@ export class CommentsService {
   }
 
   //[POST] /comments
-  async createNewComment(author: string, content: string): Promise<Comment> {
+  async createNewComment(body: CreateCommentDto): Promise<Comment> {
     try {
-      const newComment = this.commentRepository.create({ author, content });
+      const newComment = this.commentRepository.create(body);
       const savedComment = await this.commentRepository.save(newComment);
       return savedComment;
     } catch (error) {

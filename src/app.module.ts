@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommentsModule } from './modules/comments/comments.module';
+import { ProductsModule } from './modules/products/products.module';
 
 @Module({
   // config env here
@@ -20,6 +21,7 @@ import { CommentsModule } from './modules/comments/comments.module';
       synchronize: true,
     }),
     CommentsModule,
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

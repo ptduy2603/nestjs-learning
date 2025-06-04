@@ -7,8 +7,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+
+import { CreateCommentDto } from './dto/create-comments.dto';
 import { CommentsService } from './comments.service';
-import { Comment } from './comments.entity';
+import { Comment } from '../../entities/Comment.entity';
 
 @Controller({ path: '/comments', version: '1' })
 export class CommentsController {
@@ -37,17 +39,9 @@ export class CommentsController {
   }
 
   @Post()
-  async createNewComment(@Body() body: { author: string; content: string }) {
-    const { author, content } = body;
-
-    if (!author.trim() || !content.trim())
-      return { error: 'Author and content cannot be empty' };
-
+  async createNewComment(@Body() body: CreateCommentDto) {
     try {
-      const newComment = await this.commentsService.createNewComment(
-        author,
-        content,
-      );
+      const newComment = await this.commentsService.createNewComment(body);
       return newComment;
     } catch (error: unknown) {
       let message = 'Unknown error';

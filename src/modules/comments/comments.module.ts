@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CommentsService } from './comments.service';
-import { Comment } from './comments.entity';
+import { Comment } from '../../entities/Comment.entity';
 import { CommentsController } from './comments.controller';
 
 @Module({
