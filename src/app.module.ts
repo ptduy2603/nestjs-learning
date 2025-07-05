@@ -6,7 +6,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ProductsModule } from './modules/products/products.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { LoggingMiddleware } from './middlewares/logging';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   // config env here
@@ -21,8 +23,10 @@ import { LoggingMiddleware } from './middlewares/logging';
       entities: [join(__dirname, '**', '*.entity{.ts,.js}')],
       synchronize: true,
     }),
+    AuthModule,
     CommentsModule,
     ProductsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
