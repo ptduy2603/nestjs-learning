@@ -7,6 +7,8 @@ import {
 } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { ValidationError } from 'class-validator';
+import { config } from 'dotenv';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,6 +28,12 @@ async function bootstrap() {
       },
     }),
   );
+
+  // set up dotenv
+  config({ path: join(__dirname, '../.env') });
+
+  console.log('CLOUDINARY_URL:', process.env.CLOUDINARY_URL);
+  console.log('CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME);
 
   // enable versioning
   app.enableVersioning({
